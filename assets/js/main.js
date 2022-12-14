@@ -279,7 +279,7 @@ function contact(){
   var datumGreska = false;
 
   if(datum == ""){
-    datePoruka = "Morate izabrati datum";
+    datePoruka = "The date field is required";
   }
   else{
     datePoruka = "";
