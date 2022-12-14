@@ -57,15 +57,15 @@ var slajder = setInterval(function(){
         {id:"1",
           naslov : "World Cup History",
           slika : "assets/images/football.png",
-          tekst : "Due to the success of the Olympic football tournaments, FIFA, with President Jules Rimet as the driving force,"},
-          // again started looking at staging its own international tournament outside of the Olympics. On 28 May 1928,
-          // the FIFA Congress in Amsterdam decided to stage a world championship itself. With Uruguay now two-time official
-          // football world champions and to celebrate their centenary of independence in 1930, FIFA named Uruguay as the host
-          // country of the inaugural World Cup tournament. The national associations of selected nations were invited to send
-          // a team, but the choice of Uruguay as a venue for the competition meant a long and costly trip across the Atlantic Ocean
-          // for European sides. As such, no European country pledged to send a team until two months before the start of the competition. 
-          // Rimet eventually persuaded teams from Belgium, France, Romania, and Yugoslavia to make the trip. In total, 13 nations took part: seven from South America, four from Europe, and two from North America.
-
+          tekst : `Due to the success of the Olympic football tournaments, FIFA, with President Jules Rimet as the driving force,
+again started looking at staging its own international tournament outside of the Olympics. On 28 May 1928,
+          the FIFA Congress in Amsterdam decided to stage a world championship itself. With Uruguay now two-time official
+          football world champions and to celebrate their centenary of independence in 1930, FIFA named Uruguay as the host
+          country of the inaugural World Cup tournament. The national associations of selected nations were invited to send
+          a team, but the choice of Uruguay as a venue for the competition meant a long and costly trip across the Atlantic Ocean
+          for European sides. As such, no European country pledged to send a team until two months before the start of the competition. 
+          Rimet eventually persuaded teams from Belgium, France, Romania, and Yugoslavia to make the trip. In total, 13 nations took part: seven from South America, four from Europe, and two from North America.`}
+,
         {id:"2",
           naslov : "FIFA World Ranking",
           slika : "assets/images/ranking.png",
@@ -74,7 +74,7 @@ var slajder = setInterval(function(){
         {id:"3",
         naslov : "World Cup 2022 - Groups",
           slika : "assets/images/workflow.png",
-          tekst : "The 2022 World Cup will begin with 32 teams in eight groups of four:"},
+          tekst : "The 2022 World Cup will begin with 32 teams in eight groups of four:"
                   // Group A: Qatar, Ecuador, Senegal, Netherlands
                   // Group B: England, Iran, USA, Wales
                   // Group C: Argentina, Saudi Arabia, Mexico, Poland
@@ -83,6 +83,7 @@ var slajder = setInterval(function(){
                   // Group F: Belgium, Canada, Morocco, Croatia
                   // Group G: Brazil, Serbia, Switzerland, Cameroon
                   // Group H: Portugal, Ghana, Uruguay, South Korea
+    },
 
 
         {id:"4",
@@ -114,13 +115,13 @@ var slajder = setInterval(function(){
     ispisiKartice()
 
     function ispisiKartice() {
-      for (let zanimljivost of nizZanimljivosti){
+      for (var zanimljivost of nizZanimljivosti){
         console.log(zanimljivost.naslov)
  
         zanString += `<div class="blok"> <h2> ${zanimljivost.naslov} </h2> 
         <img src="${zanimljivost.slika}"/>
 
-        <button data-txt=${zanimljivost.tekst} class='zanimljivostiVise'> Read more </button>
+        <button data-txt=${zanimljivost.tekst} data-id="${zanimljivost.id}" class="zanimljivostiVise"> Read more </button>
         
         </div>
         
@@ -135,12 +136,22 @@ var slajder = setInterval(function(){
     $('.zanimljivostiVise').click(function() {
        $('#modal').toggle(500)
 
-      // var kol = this.id;
-
-      // alert(kol);
-      
+      var idN = this.dataset.id
+      var cont = document.getElementById("modalContent");
+      console.log(idN);
+     
+      for(var niz of nizZanimljivosti){
+        if(niz.id == idN){
+          var txt = niz.tekst;
+          $('#modalContent').text(txt)
+        }
+      }  
     })
-    console.log()
+
+    $('#modalClose').click(function() {
+      $('#modal').toggle(500)
+    })
+  
 
 }
 
@@ -203,33 +214,34 @@ function timer (){
 timer();
 
 //FORMA--------------------------------------
-var godina = document.getElementById("year");
-godina.innerHTML=`<option>Year</option>`;
-for(var i=1960; i<2022; i++){
-  godina.innerHTML+=`<option>${i}</option>`;
-}
-var godina = document.getElementById("month");
-godina.innerHTML=`<option>Month</option>`;
-for(var i=1; i<=12; i++){
-  godina.innerHTML+=`<option>${i}</option>`;
-}
-var godina = document.getElementById("day");
-godina.innerHTML=`<option>Day</option>`;
-for(var i=1; i<=31; i++){
-  godina.innerHTML+=`<option>${i}</option>`;
-}
 
-// $(".fa.fa-times").click(function () {
-//   $("#popup-show").hide();
-//   $(".popup-button").show();
-// });
 
-// $('.menu_btn').click(function() {
-//   $(this).toggleClass('open');
-//   $('#meni').toggleClass('active');
-// });
 
+//HAMBURGER
+$('.menu_btn').click(function() {
+  $(this).toggleClass('open');
+  $('#meni').toggleClass('active');
+});
+
+//---------------------------------------
 //REGULARNI----------------------------------------
+const btn = document.querySelector('#btn');        
+const radioButtons = document.querySelectorAll('input[name="pol"]');
+btn.addEventListener("click", () => {
+    contact()
+    let selectedPol;
+    for (const radioButton of radioButtons) {
+        if (radioButton.checked) {
+            selectedPol = radioButton.value;
+            break;
+        }
+        else{
+          
+        }
+    }
+    radioGreska.innerText = selectedPol ? `` : `You haven't selected any taster`;
+});
+
 function contact(){
   var name = document.getElementById("name").value;
   var namePoruka = "";
@@ -247,6 +259,18 @@ function contact(){
   var messagePoruka = "";
   var messageGreska = false;
 
+  var datum = document.getElementById("datum").value;
+  var datePoruka = "";
+  var datumGreska = false;
+
+  if(datum == ""){
+    datePoruka = "Morate izabrati datum";
+  }
+  else{
+    datePoruka = "";
+    dateGreska = true;
+  }
+  
 
   if(name == ""){
     namePoruka = "Name must not be an empty field";
@@ -307,27 +331,12 @@ else{
 }
 
 
-//---------------------------------------
-    const btn = document.querySelector('#btn');        
-        const radioButtons = document.querySelectorAll('input[name="pol"]');
-        btn.addEventListener("click", () => {
-            let selectedPol;
-            for (const radioButton of radioButtons) {
-                if (radioButton.checked) {
-                    selectedPol = radioButton.value;
-                    break;
-                }
-                else{
-                  
-                }
-            }
-            radioGreska.innerText = selectedPol ? `` : `You haven't selected any taster`;
-    });
+
 //---------------------------------------
   document.getElementById("nameGreska").innerHTML = namePoruka;
   document.getElementById("lastNameGreska").innerHTML = lastNamePoruka;
   document.getElementById("emailGreska").innerHTML = emailPoruka;
   document.getElementById("messageGreska").innerHTML = messagePoruka;
-  
+  document.getElementById("dateGreska").innerHTML = datePoruka;
 
 }

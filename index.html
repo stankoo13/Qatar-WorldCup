@@ -21,6 +21,8 @@
 
 <!-- HEADER -->
         <div id="modal">
+            
+            <span id="modalClose">X</span>
 
             <div id="modalContent">
 
@@ -143,15 +145,9 @@
 
                             <div class="form-group date">
                                 <label for="" id="labelaDate">Date of Birth</label>
-                                <select id="year">
-
-                                </select>
-                                <select id="month">
-
-                                </select>
-                                <select id="day">
-
-                                </select>
+                                
+                                <input type="date" name="" id="datum">
+                                <p id="dateGreska" style="color: #ff0000;"></p> 
                             </div>
 
                             <div class="form-group">
@@ -160,7 +156,7 @@
                                 <p id="radioGreska" style="color: red;"></p>
                             </div>
 
-                           <button type="submit" id="btn" class="btn btn-dark col-lg-6" style="background-color:#600113;; padding:3%; border-radius: 12px;" onclick="contact();">Submit</button>
+                           <button type="submit" id="btn" class="btn btn-dark col-lg-6" style="background-color:#600113;; padding:3%; border-radius: 12px;">Submit</button>
                          
                         </div>
                     </div>
@@ -243,7 +239,7 @@
             <script src="assets/js/main.js" defer></script>
            
 
-            <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+            <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-arrow-up"></i></button>
 
        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
  
