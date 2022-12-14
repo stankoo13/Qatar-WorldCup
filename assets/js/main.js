@@ -20,7 +20,7 @@ window.onload = function(){
           href:"#author"},
 
         {naziv:"Documentation",
-          href:"#"},
+          href:"Dokumentacija.pdf"},
     ]
 
     var navStrana = document.getElementById("meni") ;
