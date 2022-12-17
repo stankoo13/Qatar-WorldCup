@@ -777,6 +777,16 @@ line-height: 100%;
   #mainContent {
     width: 70%;
   }
+@media (max-width:1171 px) {
+  #mainContent {
+    height: 400px;
+    overflow: scroll;
+  }
+@media (max-width: 768px) {
+    #modalContent {
+         padding: 15px;
+     }
+}
   #mainContent h1, #mainContent h2 {
     font-size: 25px;
   }
